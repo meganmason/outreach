@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import sys
+#import sys
 
 df = pd.read_csv('bogus_sno.txt', sep=",",header=56, names=["date", 'depth [cm]','SWE [mm]'])
 
@@ -10,16 +10,19 @@ df = pd.read_csv('bogus_sno.txt', sep=",",header=56, names=["date", 'depth [cm]'
 
 sns.set_style('darkgrid')
 sns.set_style("ticks")
-sns.set_context('notebook') #[notebook, paper, talk, poster]
-
+sns.set_context('talk') #[notebook, paper, talk, poster]
 
 fig, a=plt.subplots(2,1)
 
+
 a[0].plot(pd.to_datetime(df["date"]),df['depth [cm]'])
 a[0].set_ylabel('Snow Depth [cm]')
-a[0].set_title('Bogus Basin Snow depth')
+a[0].set_title('Bogus Basin Snow Depth')
 # plt.legend()
 a[0].grid(True)
+
+
+
 
 a[1].plot(pd.to_datetime(df["date"]), df['SWE [mm]'].div(10),color="red")
 # a[1].plot(pd.to_datetime(df["date"]),np.divide(df['SWE [mm]',10]),color="red")
@@ -30,8 +33,9 @@ a[1].set_ylabel('SWE [cm]') #CONVERTED (for 7th grade comparison)
 #a.set_ylim()
 a[1].set_title('Bogus Basin Snow Water Equivalent (SWE)')
 a[1].grid(True)
+plt.subplots_adjust(hspace=0.5)
 plt.show()
-
+plt.savefig('plot_depth_swe')
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
